@@ -61,7 +61,8 @@ export default function TenantWallet() {
     setErr(''); setMsg(''); setBusy(true)
     try {
       await client.post('/tenant/recharges', { amount: Number(amount), utr: utr.trim().toUpperCase() })
-      setMsg('Recharge submitted - your landlord will approve it shortly.')
+      // Updated message to reflect instant processing instead of waiting for a landlord
+      setMsg('Recharge successful! Wallet credited and power restored instantly.')
       setAmount(''); setUtr('')
       load()
     } catch (e2) {
@@ -107,7 +108,8 @@ export default function TenantWallet() {
 
       <form onSubmit={submitRecharge} className="card space-y-3">
         <h2 className="font-semibold text-slate-800">Submit Recharge</h2>
-        <p className="text-xs text-slate-400">After paying, confirm the amount and enter the UPI transaction id (UTR) so your landlord can approve it.</p>
+        {/* Updated description text */}
+        <p className="text-xs text-slate-400">After paying, confirm the amount and enter the UPI transaction id (UTR) to instantly credit your wallet and restore power.</p>
         <div>
           <label className="label">Amount (₹)</label>
           <input className="input" type="number" min="1" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} required />
