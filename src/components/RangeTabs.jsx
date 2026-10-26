@@ -1,7 +1,8 @@
 const RANGES = [
   { key: 'day', label: 'Day' },
   { key: 'month', label: 'Month' },
-  { key: 'year', label: 'Year' }
+  { key: 'year', label: 'Year' },
+  { key: 'total', label: 'Total' }
 ]
 
 export default function RangeTabs({ value, onChange }) {
