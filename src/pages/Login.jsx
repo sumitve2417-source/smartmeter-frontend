@@ -3,6 +3,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 import { apiErrorMessage } from '../api/client'
 
+export function homePathForRole(role) {
+  if (role === 'ADMIN') return '/admin'
+  if (role === 'LANDLORD') return '/landlord'
+  if (role === 'TENANT') return '/tenant'
+  return '/login'
+}
+
 export default function Login() {
   const { login } = useAuth()
   const nav = useNavigate()
@@ -17,7 +24,7 @@ export default function Login() {
     setLoading(true)
     try {
       const data = await login(username.trim().toLowerCase(), password)
-      nav(data.role === 'LANDLORD' ? '/landlord' : '/tenant', { replace: true })
+      nav(homePathForRole(data.role), { replace: true })
     } catch (err) {
       setError(apiErrorMessage(err, 'Invalid email or password'))
     } finally {
